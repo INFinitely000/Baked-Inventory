@@ -211,9 +211,11 @@ public class Inventory
 
     private void FindNextEmptySlot()
     {
-        if (m_data.slots[Data.firstEmptySlotIndex].item.HasValue == false && m_data.slots[Data.firstEmptySlotIndex].isUnlocked == true) return;
+        if (Data.firstEmptySlotIndex != -1 && 
+            m_data.slots[Data.firstEmptySlotIndex].item.HasValue == false && 
+            m_data.slots[Data.firstEmptySlotIndex].isUnlocked == true) return;
 
-        for (int index = m_data.firstEmptySlotIndex; index < m_data.slots.Length; index++)
+        for (int index = Mathf.Min(m_data.firstEmptySlotIndex, 0); index < m_data.slots.Length; index++)
         {
             if (m_data.slots[index].item.HasValue == false && m_data.slots[index].isUnlocked == true)
             {
